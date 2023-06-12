@@ -1,0 +1,51 @@
+8)
+
+select cliente.nome, cidade.nome
+from cliente
+inner join endereco on endereco.id = cliente.endereco
+inner join cidade on cidade.id = endereco.cidade 
+
+select cliente.nome
+from cliente
+inner join endereco on endereco.id = cliente.endereco
+inner join cidade on cidade.id = endereco.cidade and cidade.nome = 'Tubarão'
+
+
+9)
+
+select cliente.nome, venda."data", it.produto, it.quantidade 
+from itens_venda it
+inner join venda on venda.id = it.venda
+inner join cliente on cliente.id = venda.cliente;
+
+select cliente.nome, venda."data", it.produto, it.quantidade 
+from itens_venda it
+inner join venda on venda.id = it.venda
+inner join cliente on cliente.id = venda.cliente and cliente.nome = 'Ana';
+
+10) 
+
+select produto.nome, categoria.descricao as categoria
+from produto
+right join categoria on categoria.id = produto.categoria;
+
+11) 
+
+select telefone.telefone, cliente.nome
+from telefone
+inner join cliente on cliente.id = telefone.cliente;
+
+select venda."data" as venda
+from venda
+inner join itens_venda it on venda.id = it.venda 
+inner join produto on produto.id = it.produto and produto.nome = 'cadeira'
+
+select count(*) as totalVendasDia 
+from venda 
+where venda."data" = '2023-06-12';
+
+select sum(produto.valor*it.quantidade) as totalCaixa
+from venda
+inner join itens_venda it on venda.id = it.venda
+inner join produto on produto.id = it.produto
+where venda."data" = '2023-06-12'
